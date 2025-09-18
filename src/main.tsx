@@ -263,10 +263,13 @@ export default class MediaNotesPlugin extends Plugin {
 
 		this.players = {};
 
-		this.app.workspace.getLeavesOfType("markdown").forEach((leaf) => {
-			const view = leaf.view as MarkdownView;
-			this.renderPlayerInView(view);
-		});
+		const markdownLeaves = this.app.workspace.getLeavesOfType("markdown");
+		if (markdownLeaves) {
+			markdownLeaves.forEach((leaf) => {
+				const view = leaf.view as MarkdownView;
+				this.renderPlayerInView(view);
+			});
+		}
 
 		// This adds a simple command that can be triggered anywhere
 		this.addCommand({
